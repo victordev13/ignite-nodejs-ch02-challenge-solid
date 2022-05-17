@@ -1,0 +1,237 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "version": "1.0.0",
+    "title": "Challenge 02 - Documenting with Swagger",
+    "description": "Ignite NodeJS (Chapter 02) - Challenge 02 - Documenting with Swagger"
+  },
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "header",
+            "name": "user_id",
+            "description": "User Id for check the permissions",
+            "example": "9cf9bfcc-e716-4e45-b710-663c4011a493"
+          }
+        ],
+        "summary": "List All Users",
+        "description": "List All Users",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "9cf9bfcc-e716-4e45-b710-663c4011a493"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Victor"
+                      },
+                      "admin": {
+                        "type": "boolean",
+                        "example": "false"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "victor@gmail.com"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "example": "2022-05-17T22:15:00.142Z"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "example": "2022-05-17T22:15:00.142Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400":{
+            "description": "Bad Request",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "User is not Admin"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Create new User",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Victor"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "victor@gmail.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "User Already exists!"
+          }
+        }
+      }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "user_id",
+            "description": "User Id",
+            "required": true
+          }
+        ],
+        "summary": "Users Details",
+        "description": "Users Details",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "9cf9bfcc-e716-4e45-b710-663c4011a493"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Victor"
+                    },
+                    "admin": {
+                      "type": "boolean",
+                      "example": "false"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "victor@gmail.com"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "example": "2022-05-17T22:15:00.142Z"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "example": "2022-05-17T22:15:00.142Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}/admin": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "user_id",
+            "description": "User Id",
+            "required": true
+          }
+        ],
+        "summary": "Turn User in Admin",
+        "description": "Turn User in Admin",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "9cf9bfcc-e716-4e45-b710-663c4011a493"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Victor"
+                    },
+                    "admin": {
+                      "type": "boolean",
+                      "example": "true"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "victor@gmail.com"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "example": "2022-05-17T22:15:00.142Z"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "example": "2022-05-17T22:15:00.142Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
